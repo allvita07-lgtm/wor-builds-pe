@@ -1,1 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WoR Builds BA 🔥</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>body{font-family:system-ui;background:#09090b;color:white}</style>
+</head>
+<body class="p-4 max-w-md mx-auto">
+  <h1 class="text-3xl font-bold mb-2 text-purple-400">WoR Builds BA</h1>
+  <p class="text-zinc-400 mb-6">Meta Fev 2026 • Paulo Afonso</p>
 
+  <input id="busca" type="text" placeholder="Buscar herói..." 
+         class="w-full p-3 bg-zinc-900 rounded-2xl border border-zinc-700 mb-6 text-white" onkeyup="filtrar()">
+
+  <div id="lista" class="space-y-4">
+    <!-- heróis aparecem aqui -->
+  </div>
+
+  <script>
+    const herois = [
+      {n:"Rivenhald", t:"S+", c:"Tactician", g:"Soulbound Arcana", s:"ATK > Crit Rate > Crit DMG", w1:"96%", w2:"94%"},
+      {n:"Ne Zha", t:"S+", c:"Fighter", g:"Night Terror", s:"Crit DMG > ATK > HP", w1:"98%", w2:"90%"},
+      {n:"Valara", t:"S+", c:"Tactician", g:"The Wisdom", s:"Crit Rate > ATK > Speed", w1:"95%", w2:"97%"},
+      {n:"Dolores", t:"S+", c:"Healer", g:"Asclepius", s:"HP > Heal > Speed", w1:"97%", w2:"95%"},
+      {n:"Hatssut", t:"S+", c:"Marksman", g:"Hawk Eye", s:"ATK > Crit Rate > Crit DMG", w1:"94%", w2:"92%"},
+      {n:"Sun Wukong", t:"S+", c:"Fighter", g:"Ageless Wrath", s:"Crit Rate > Crit DMG", w1:"93%", w2:"91%"},
+      {n:"Elowyn", t:"S+", c:"Healer", g:"Invigoration", s:"HP > Speed", w1:"96%", w2:"93%"},
+      {n:"Vierna", t:"S+", c:"Mage", g:"Soulbound Arcana", s:"Crit Rate > ATK", w1:"92%", w2:"94%"}
+    ];
+
+    function mostrar() {
+      let html = '';
+      herois.forEach(h => {
+        html += `
+          <div class="bg-zinc-900 p-4 rounded-3xl border border-zinc-700" onclick="alert('Build de ${h.n}\\nGear: ${h.g}\\nStats: ${h.s}\\nGR1: ${h.w1} vitória\\nGR2: ${h.w2} vitória\\n\\n✅ Copie e cole no jogo!')">
+            <div class="flex justify-between">
+              <span class="text-xl font-bold">${h.n}</span>
+              <span class="px-3 py-1 bg-purple-600 text-xs font-bold rounded-full">${h.t}</span>
+            </div>
+            <p class="text-zinc-400">${h.c}</p>
+          </div>`;
+      });
+      document.getElementById('lista').innerHTML = html;
+    }
+
+    function filtrar() {
+      const termo = document.getElementById('busca').value.toLowerCase();
+      const filtrados = herois.filter(h => h.n.toLowerCase().includes(termo));
+      let html = '';
+      filtrados.forEach(h => {
+        html += `
+          <div class="bg-zinc-900 p-4 rounded-3xl border border-zinc-700" onclick="alert('Build de ${h.n}\\nGear: ${h.g}\\nStats: ${h.s}\\nGR1: ${h.w1} vitória\\nGR2: ${h.w2} vitória')">
+            <div class="flex justify-between">
+              <span class="text-xl font-bold">${h.n}</span>
+              <span class="px-3 py-1 bg-purple-600 text-xs font-bold rounded-full">${h.t}</span>
+            </div>
+            <p class="text-zinc-400">${h.c}</p>
+          </div>`;
+      });
+      document.getElementById('lista').innerHTML = html || '<p class="text-center text-zinc-500 py-8">Nenhum herói encontrado 😢</p>';
+    }
+
+    mostrar();
+  </script>
+</body>
+</html>
